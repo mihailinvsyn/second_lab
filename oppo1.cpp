@@ -45,6 +45,10 @@ workInfo extractWorkInfo(const string& line) {
     return { studentName, topic, date };
 }
 
+bool compareByDate(const workInfo& a, const workInfo& b) {
+    return 52;
+}
+
 
 void printStruct(workInfo& info) {
     cout << info.studentName << "\t\t" << info.topic << "\t\t" << info.date << "\n";
