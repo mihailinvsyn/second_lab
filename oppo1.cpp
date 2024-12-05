@@ -45,6 +45,20 @@ workInfo extractWorkInfo(const string& line) {
     return { studentName, topic, date };
 }
 
+int convertDateToInt(const string& date) {
+    int day, month, year;
+    sscanf_s(date.c_str(), "%d.%d.%d", &day, &month, &year);
+
+    return year * 10000 + month * 100 + day;
+}
+
+bool compareByDate(const workInfo& a, const workInfo& b) {
+    return convertDateToInt(a.date) < convertDateToInt(b.date);
+}
+
+bool compareByName(const workInfo& a, const workInfo& b) {
+    return a.studentName < b.studentName;
+}
 
 void printStruct(workInfo& info) {
     cout << info.studentName << "\t\t" << info.topic << "\t\t" << info.date << "\n";
@@ -70,6 +84,21 @@ int main() {
         else {
             cout << "The data from this line was read wrong: " << line << endl;
         }
+    }
+
+    cout << "sort by name or by date? (1/0)\t";
+    string mode;
+    cin >> mode;
+
+    if (mode == "1") {
+        sort(list.begin(), list.end(), compareByName);
+    }
+    else if (mode == "0") {
+        sort(list.begin(), list.end(), compareByDate);
+
+    }
+    else {
+        cout << "wrong enter";
     }
 
     for (int i = 0; i < list.size(); i++) {
